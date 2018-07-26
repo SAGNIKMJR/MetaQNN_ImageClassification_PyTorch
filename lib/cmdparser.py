@@ -49,6 +49,9 @@ parser.add_argument('-pf', '--print-freq', default=50, type=int,
                     metavar='N', help='print frequency (default: 50)')
 
 # Learning Rate schedule
+parser.add_argument('-iu', '--init-utility', default=0.50, type=float,
+                    metavar='IU', help='initial utility of all transitions, set to acc of avg model\
+                     (default: 0.50)')
 parser.add_argument('-lr', '--learning-rate', default=1e-1, type=float,
                     metavar='LR', help='initial learning rate (default: 0.1)')
 parser.add_argument('--lr-wr-epochs', default=10, type=int,

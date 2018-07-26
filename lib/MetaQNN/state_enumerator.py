@@ -63,7 +63,7 @@ class StateEnumerator:
         self.conv_layer_min_limit = args.conv_layer_min_limit
         self.conv_layer_max_limit = args.conv_layer_max_limit
         # TODO: hard-coded now to early stopping criterion, should be a user input
-        self.init_utility = 0.15
+        self.init_utility = args.init_utility
 
     def enumerate_state(self, state, q_values):
         """Defines all state transitions, populates q_values where actions are valid

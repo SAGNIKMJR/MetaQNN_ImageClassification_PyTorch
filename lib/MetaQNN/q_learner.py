@@ -154,7 +154,6 @@ class QLearner:
         self.epsilon = epsilon
         self.WeightInitializer = WeightInitializer
         self.device = device
-        # TODO: hard-coded only for dual-gpu and torch.nn.DataParallel
         self.gpu_mem_0 = GPUMem(torch.device('cuda') == self.device)
         self.save_path = save_path
         # TODO: hard-coded arc no. to resume from if epsilon < 1
@@ -167,8 +166,6 @@ class QLearner:
         state_list = self.__run_agent()
 
         net_string = self.stringutils.state_list_to_string(state_list, num_classes=len(dataset.val_loader.dataset.class_to_idx))
-        # REMOVE
-        # net_string = self.stringutils.state_list_to_string(state_list, num_classes=dataset.trainset.num_of_classes)
 
         train_flag = True
         if net_string in self.replay_dictionary['net'].values:
@@ -198,8 +195,6 @@ class QLearner:
                 self.__reset_for_new_walk()
                 state_list = self.__run_agent()
                 net_string = self.stringutils.state_list_to_string(state_list, num_classes=len(dataset.val_loader.dataset.class_to_idx))
-                # REMOVE
-                # net_string = self.stringutils.state_list_to_string(state_list, num_classes=dataset.trainset.num_of_classes)
                 if net_string in self.replay_dictionary['net'].values:
                     spp_size = self.replay_dictionary[self.replay_dictionary['net'] == net_string]['spp_size'].values[0]
                     hard_best_val = self.replay_dictionary[self.replay_dictionary['net'] == net_string]['reward'].values[0]
@@ -242,8 +237,6 @@ class QLearner:
     def __train_val_net(self, state_list, state_space_parameters, dataset):
         best_prec = 0.
         num_classes = len(dataset.val_loader.dataset.class_to_idx)
-        # REMOVE
-        # num_classes = dataset.trainset.num_of_classes
         net_input, _ = next(iter(dataset.val_loader))
 
         model = net(state_list, state_space_parameters, num_classes, net_input, self.args.batch_norm, self.args.drop_out_drop)
@@ -345,10 +338,10 @@ class QLearner:
         self.__update_q_value(states[-2], states[-1], termination_reward)
         for i in reversed(range(len(states) - 2)):
             
-            # TODO: q-learning update (set proper learning rate)
+            # TODO: q-learning update (set proper q-learning rate in cmdparser.py)
             self.__update_q_value(states[i], states[i+1], 0)
 
-            # TODO: new update (can't be used since not q-learning anymore)
+            # TODO: modified update for shorter search schedules (doesn't use q-learning rate in computation)
             # self.__update_q_value(states[i], states[i+1], termination_reward)
 
     def __update_q_value(self, start_state, to_state, reward):
@@ -363,16 +356,15 @@ class QLearner:
         max_over_next_states = max(self.qstore.q[to_state.as_tuple()]['utilities']) if to_state.terminate != 1 else 0
         action_between_states = self.enum.transition_to_action(start_state, to_state).as_tuple()
 
-        # TODO: q-learning update (set proper learning rate)
+        # TODO: q-learning update (set proper q-learning rate in cmdparser.py)
         values[actions.index(action_between_states)] = values[actions.index(action_between_states)] + \
                                                        self.args.q_learning_rate * \
                                                        (reward + self.args.q_discount_factor *
                                                         max_over_next_states -
                                                         values[actions.index(action_between_states)])
 
-        # TODO: new update (can't be used since not q-learning anymore)
+        # TODO: modified update for shorter search schedules (doesn't use q-learning rate in computation)
         # values[actions.index(action_between_states)] = values[actions.index(action_between_states)] + \
-        #                                                self.args.q_learning_rate * \
         #                                                (max(reward, values[actions.index(action_between_states)]) -
         #                                                 values[actions.index(action_between_states)])
 
