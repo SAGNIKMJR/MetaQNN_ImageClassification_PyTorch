@@ -1,6 +1,6 @@
 import argparse
 
-parser = argparse.ArgumentParser(description='PyTorch Lifelong MetaQNN Training')
+parser = argparse.ArgumentParser(description='PyTorch MetaQNN Image Classification')
 
 # Dataset and loading
 parser.add_argument('-train', '--train-data', metavar='TRAINDIR',
