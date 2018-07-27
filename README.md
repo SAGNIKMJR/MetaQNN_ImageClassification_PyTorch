@@ -44,8 +44,10 @@ def __update_q_value(self, start_state, to_state, reward):
  iii) Continuing from the previous Q-learning iteration if code crashes  while running      
  iv) Running over single or multiple GPUs    
  iv) Automatic calculation of available GPU space and skipping of architecture if it doesn't fit      
-        
-# Running Search    
+             
+# NOTE:    
+code for MNIST, CIFAR10 and CIFAR100; for other datasets dataloader has to be added to _lib/Datasets/datasets.py_    
+# Running Search:        
 Look at __lib/cmdparser.py__ for the available command line options or just run 
 ```sh
 $ python main.py --help
