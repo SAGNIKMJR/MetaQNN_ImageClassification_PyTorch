@@ -46,8 +46,6 @@ def main():
 	data_init_method = getattr(datasets, args.dataset)
 	dataset = data_init_method(torch.cuda.is_available(), args)
 
-
-
 	gen = QLearner(state_space_parameters, 1, WeightInitializer, device, args, save_path, qstore = args.qstore_path, replaydict = args.replay_dict_path)
 
 	if (args.continue_epsilon not in np.array(state_space_parameters.epsilon_schedule)[:,0]):
