@@ -8,7 +8,7 @@ parser.add_argument('-train', '--train-data', metavar='TRAINDIR',
 parser.add_argument('-val', '--val-data', metavar='TESTDIR',
                     help='path to test-dataset')
 parser.add_argument('--dataset', default='MNIST',
-                    help='name of dataset')
+                    help='name of dataset (options: MNIST, CIFAR10, CIFAR100)')
 parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
                     help='number of data loading workers (default: 4)')
 parser.add_argument('-p', '--patch-size', default=28, type=int,
