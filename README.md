@@ -47,8 +47,8 @@ def __update_q_value(self, start_state, to_state, reward):
         
 # Running Search    
 Look at __lib/cmdparser.py__ for the available command line options or just run 
-```python
-python main.py --help
+```sh
+$ python main.py --help
 ```
       
 Finally, run __main.py__
