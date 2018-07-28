@@ -220,15 +220,10 @@ class StateEnumerator:
         # Add states to transition and q_value dictionary
         q_values[state.as_tuple()] = {'actions': [to_state.as_tuple() for to_state in actions],
                                       'utilities': [self.init_utility for i in range(len(actions))]}
-        # q_values_bucketed[state.as_tuple()] = {'actions': [self.bucket_state_tuple(to_state.as_tuple()) for to_state in actions],\
-        #                                            'utilities': [self.init_utility for i in range(len(actions))]}
-
         return q_values        
 
     def transition_to_action(self, start_state, to_state):
         action = to_state.copy()
-        # if to_state.layer_type not in ['fc', 'gap']: #if to_state.layer_type in ['fc', 'gap']:
-        #     action.image_size = start_state.image_size
         return action
 
     def state_action_transition(self, start_state, action):

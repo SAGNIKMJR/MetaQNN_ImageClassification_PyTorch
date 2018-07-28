@@ -37,8 +37,8 @@ parser.add_argument('--epochs', default=30, type=int, metavar='N',
                     help='number of total epochs to run')
 parser.add_argument('-b', '--batch-size', default=64, type=int,
                     metavar='N', help='mini-batch size (default: 128)')
-parser.add_argument('--momentum', default=0.0, type=float, metavar='M',
-                    help='momentum (default 0.0)')
+parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
+                    help='momentum (default 0.9)')
 parser.add_argument('-wd', '--weight-decay', default=1e-5, type=float,
                     metavar='W', help='weight decay (default: 1e-5)')
 parser.add_argument('-bn', '--batch-norm', default=1e-5, type=float,
