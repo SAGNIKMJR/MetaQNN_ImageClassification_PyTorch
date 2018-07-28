@@ -47,7 +47,8 @@ def __update_q_value(self, start_state, to_state, reward):
              
 # NOTE:    
 code for MNIST, CIFAR10 and CIFAR100; for other datasets dataloader has to be added to _lib/Datasets/datasets.py_    
-# Running Search:        
+# Running Search:       
+Use _python 2.7_ and _torch 0.4.0_
 Look at __lib/cmdparser.py__ for the available command line options or just run 
 ```sh
 $ python main.py --help
