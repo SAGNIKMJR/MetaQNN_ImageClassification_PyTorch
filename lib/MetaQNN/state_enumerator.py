@@ -66,24 +66,6 @@ class StateEnumerator:
         self.init_utility = args.init_utility
 
     def enumerate_state(self, state, q_values):
-        """Defines all state transitions, populates q_values where actions are valid
-
-        Legal Transitions:
-           conv         -> conv, pool                   (IF state.layer_depth < layer_limit)
-           conv         -> fc                           (If state.layer_depth < layer_limit)
-           conv         -> softmax, gap                 (Always)
-
-           pool          -> conv,                       (If state.layer_depth < layer_limit)
-           pool          -> fc,                         (If state.layer_depth < layer_limit)
-           pool          -> softmax, gap                (Always)
-
-           fc           -> fc                           (If state.layer_depth < layer_limit AND state.filter_depth < 3)
-           fc           -> softmax                      (Always)
-
-           gap          -> softmax                      (Always)
-
-        Updates: q_values and returns q_values
-        """
         actions = []
 
         if state.terminate == 0:
