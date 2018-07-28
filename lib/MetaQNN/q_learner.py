@@ -286,7 +286,6 @@ class QLearner:
     def __reset_for_new_walk(self):
 
         self.state_list = []
-        self.bucketed_state_list = []
         self.state = se.State('start', 0, 1, 0, 0, self.args.patch_size, 0, 0)
 
     def __run_agent(self):
