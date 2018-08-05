@@ -51,7 +51,11 @@ def __update_q_value(self, start_state, to_state, reward):
  iv) Automatic calculation of available GPU space and skipping of architecture if it doesn't fit      
              
 # NOTE:    
-code for MNIST, CIFAR10 and CIFAR100; for other datasets dataloader has to be added to _lib/Datasets/datasets.py_    
+code for MNIST, CIFAR10 and CIFAR100; for other datasets dataloader has to be added to _lib/Datasets/datasets.py_  
+# Intalling Code Dependencies -     
+```sh
+pip install -r requirements.txt
+```      
 # Running Search:       
 Use _python 2.7_ and _torch 0.4.0_      
 Look at __lib/cmdparser.py__ for the available command line options or just run 
